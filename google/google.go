@@ -72,7 +72,7 @@ func Session(name string) gin.HandlerFunc {
 }
 
 func SigninHandler(ctx *gin.Context) {
-	state = randToken()
+	state := randToken()
 	session := sessions.Default(ctx)
 	session.Set("state", state)
 	session.Save()
