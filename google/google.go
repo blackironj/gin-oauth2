@@ -73,15 +73,16 @@ func Session(name string) gin.HandlerFunc {
 	return sessions.Sessions(name, store)
 }
 
-func LoginHandler(ctx *gin.Context) {
+func SigninHandler(ctx *gin.Context) {
 	state = randToken()
 	session := sessions.Default(ctx)
 	session.Set("state", state)
 	session.Save()
-	ctx.Writer.Write([]byte("<html><title>Golang Google</title> <body> <a href='" + GetLoginURL(state) + "'><button>Login with Google!</button> </a> </body></html>"))
+
+	ctx.Redirect(http.StatusMovedPermanently, GetSigninURL(state))
 }
 
-func GetLoginURL(state string) string {
+func GetSigninURL(state string) string {
 	return conf.AuthCodeURL(state)
 }
 

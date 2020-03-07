@@ -7,8 +7,8 @@ import (
 	"os"
 	"path"
 
+	"github.com/blackironj/gin-oauth2/google"
 	"github.com/gin-gonic/gin"
-	"github.com/zalando/gin-oauth2/google"
 )
 
 var redirectURL, credFile string
@@ -40,7 +40,7 @@ func main() {
 	google.Setup(redirectURL, credFile, scopes, secret)
 	router.Use(google.Session(sessionName))
 
-	router.GET("/login", google.LoginHandler)
+	router.GET("/login", google.SigninHandler)
 
 	// protected url group
 	private := router.Group("/auth")
