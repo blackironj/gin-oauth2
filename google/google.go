@@ -39,9 +39,7 @@ type User struct {
 	Hd            string `json:"hd"`
 }
 
-var cred Credentials
 var conf *oauth2.Config
-var state string
 var store sessions.CookieStore
 
 func randToken() string {
